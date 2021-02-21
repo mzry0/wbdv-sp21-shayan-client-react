@@ -7,7 +7,8 @@ import courseService from "../services/course-service";
 export default class CourseManager
   extends React.Component {
   state = {
-    courses: []
+    courses: [],
+    courseTitleInput: ''
   }
 
   componentDidMount() {
@@ -49,10 +50,14 @@ export default class CourseManager
   addCourse = () => {
     // alert('add course')
     const newCourse = {
-      title: "New Course",
+      title: this.state.courseTitleInput,
       owner: "me",
       lastModified: "2/10/2021"
     }
+    // Set title to empty string
+    this.setState(() => ({
+      courseTitleInput: ''
+    }))
     courseService.createCourse(newCourse)
         .then(actualCourse => {
           this.state.courses.push(actualCourse)
@@ -68,22 +73,29 @@ export default class CourseManager
                   <i className="fa fa-bars fa-2x"></i>
               </div>
               <div className="col-2 d-none d-sm-table-cell">
-                  <h4>Course Manager</h4>
+                  <h3>Course Manager</h3>
               </div>
               <div className="col-8">
                   <input className="form-control"
-                         placeholder="New Course Title"/>
+                         placeholder="New Course Title"
+                        value={this.state.courseTitleInput}
+                         onChange={(e) =>
+                             this.setState((prevState) => ({
+                                 courses: prevState.courses,
+                                 courseTitleInput: e.target.value
+                             }))}
+                  />
               </div>
               <div className="col-1">
-                  <i className="fa fa-plus fa-2x"></i>
+                  <i className="fa fa-plus fa-2x btn" onClick={this.addCourse}></i>
               </div>
           </div>
-          <Link to="/">
-              <i className="fas fa-2x fa-home float-right"></i>
-          </Link>
-        <button onClick={this.addCourse}>
-          Add Course
-        </button>
+          {/*<Link to="/">*/}
+          {/*    <i className="fas fa-2x fa-home float-right"></i>*/}
+          {/*</Link>*/}
+        {/*<button onClick={this.addCourse}>*/}
+        {/*  Add Course*/}
+        {/*</button>*/}
 
         {/*<Route path="/courses/table" component={CourseTable}/>*/}
         <Route path="/courses/table" exact={true} >
