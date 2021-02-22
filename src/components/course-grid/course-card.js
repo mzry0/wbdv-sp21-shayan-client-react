@@ -22,7 +22,11 @@ const CourseCard = ({course, updateCourse, deleteCourse}) => {
         <div className="card-body">
             {
                 !editing &&
-                <h5 className="card-title">{course.title}</h5>
+                <h5 className="card-title">
+                    <Link to="/editor">
+                        {course.title}
+                    </Link>
+                </h5>
             }
             {
                 editing &&

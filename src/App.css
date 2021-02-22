@@ -15,6 +15,10 @@
   box-shadow: 2px 2px 3px #999;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
 .float-button-icon{
   margin-top:22px;
 }

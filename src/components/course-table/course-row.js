@@ -4,8 +4,6 @@ import {Link} from "react-router-dom";
 const CourseRow = (
   {
     course,
-    lastModified="1/1/2021",
-    owner="who knows?",
     deleteCourse,
     updateCourse
   }) => {

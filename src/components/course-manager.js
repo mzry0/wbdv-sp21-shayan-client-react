@@ -1,6 +1,6 @@
 import React from 'react'
-import CourseTable from "./course-table";
-import CourseGrid from "./course-grid";
+import CourseTable from "./course-table/course-table";
+import CourseGrid from "./course-grid/course-grid";
 import {Link, Route} from "react-router-dom";
 import courseService from "../services/course-service";
 
@@ -113,7 +113,7 @@ export default class CourseManager
         </Route>
         {/*<CourseTable courses={this.state.courses}/>*/}
         {/*<CourseGrid courses={this.state.courses}/>*/}
-          <div className="float-button" onClick={this.addCourse}>
+          <div className="float-button cursor-pointer" onClick={this.addCourse}>
               <i className="fa fa-plus float-button-icon" ></i></div>
       </div>
     )

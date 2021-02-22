@@ -4,6 +4,10 @@ export const findAllCourses = () =>
     fetch(COURSES_URL)
         .then(response => response.json())
 
+export const findCourse = (courseId) =>
+    fetch(`${COURSES_URL}/${courseId}`)
+        .then(response => response.json())
+
 export const deleteCourse = (courseId) =>
     fetch(`${COURSES_URL}/${courseId}`, {
         method: 'DELETE'
@@ -32,6 +36,7 @@ export const updateCourse = (courseId,course) =>
 
 const api = {
     findAllCourses: findAllCourses,
+    findCourse,
     deleteCourse: deleteCourse,
     createCourse,
     updateCourse
