@@ -14,7 +14,6 @@ export default class CourseManager
   componentDidMount() {
     courseService.findAllCourses()
         .then(courses => this.setState({courses}))
-        // .then(courses => this.setState({courses: courses}))
   }
 
   updateCourse = (course) => {
@@ -35,12 +34,8 @@ export default class CourseManager
   }
 
   deleteCourse = (course) => {
-    // alert("delete course " + course._id)
     courseService.deleteCourse(course._id)
         .then(status => {
-          // this.setState({
-          //   courses: this.state.courses.filter(c => c._id !== course._id)
-          // })
           this.setState((prevState) => ({
             courses: prevState.courses.filter(c => c._id !== course._id)
           }))
@@ -48,7 +43,6 @@ export default class CourseManager
   }
 
   addCourse = () => {
-    // alert('add course')
     const newCourse = {
       title: this.state.courseTitleInput,
       owner: "me",
@@ -90,29 +84,18 @@ export default class CourseManager
                   <i className="fa fa-plus fa-2x btn float-right" onClick={this.addCourse}></i>
               </div>
           </div>
-          {/*<Link to="/">*/}
-          {/*    <i className="fas fa-2x fa-home float-right"></i>*/}
-          {/*</Link>*/}
-        {/*<button onClick={this.addCourse}>*/}
-        {/*  Add Course*/}
-        {/*</button>*/}
-
-        {/*<Route path="/courses/table" component={CourseTable}/>*/}
         <Route path="/courses/table" exact={true} >
           <CourseTable
               updateCourse={this.updateCourse}
               deleteCourse={this.deleteCourse}
               courses={this.state.courses}/>
         </Route>
-        {/*<Route path="/courses/grid" component={CourseGrid}/>*/}
         <Route path="/courses/grid" exact={true} >
           <CourseGrid
               courses={this.state.courses}
               updateCourse={this.updateCourse}
               deleteCourse={this.deleteCourse}/>
         </Route>
-        {/*<CourseTable courses={this.state.courses}/>*/}
-        {/*<CourseGrid courses={this.state.courses}/>*/}
           <div className="float-button cursor-pointer" onClick={this.addCourse}>
               <i className="fa fa-plus float-button-icon" ></i></div>
       </div>

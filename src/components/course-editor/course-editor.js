@@ -47,7 +47,6 @@ const CourseEditor = ({history}) =>
 
 
                     <a className="btn btn-danger btn-block"
-                       href="../index.html"
                        onClick={() => history.goBack()}>
                         Cancel
                     </a>
@@ -110,9 +109,4 @@ const CourseEditor = ({history}) =>
 
     </div>
 
-// const CourseEditor = () => {
-//   return (
-//     <h1>Course Editor</h1>
-//   )
-// }
 export default CourseEditor

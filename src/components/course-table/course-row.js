@@ -40,7 +40,6 @@ const CourseRow = (
         <td className="d-none d-sm-table-cell">{course.lastModified}</td>
         <td>
             <i onClick={() => deleteCourse(course)} className="fas fa-trash float-right btn mr-1"></i>
-            {/*<i onClick={() => setEditing((prevEditing) => !prevEditing)} className="fas fa-edit"></i>*/}
 
             {
                 editing &&
