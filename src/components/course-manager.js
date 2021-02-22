@@ -86,8 +86,8 @@ export default class CourseManager
                              }))}
                   />
               </div>
-              <div className="col-1">
-                  <i className="fa fa-plus fa-2x btn" onClick={this.addCourse}></i>
+              <div className="col-1 ml-auto">
+                  <i className="fa fa-plus fa-2x btn float-right" onClick={this.addCourse}></i>
               </div>
           </div>
           {/*<Link to="/">*/}
@@ -106,7 +106,10 @@ export default class CourseManager
         </Route>
         {/*<Route path="/courses/grid" component={CourseGrid}/>*/}
         <Route path="/courses/grid" exact={true} >
-          <CourseGrid courses={this.state.courses}/>
+          <CourseGrid
+              courses={this.state.courses}
+              updateCourse={this.updateCourse}
+              deleteCourse={this.deleteCourse}/>
         </Route>
         {/*<CourseTable courses={this.state.courses}/>*/}
         {/*<CourseGrid courses={this.state.courses}/>*/}

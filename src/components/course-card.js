@@ -1,14 +1,7 @@
 import React, {useState} from 'react'
 import {Link} from "react-router-dom";
 
-const CourseRow = (
-  {
-    course,
-    lastModified="1/1/2021",
-    owner="who knows?",
-    deleteCourse,
-    updateCourse
-  }) => {
+const CourseCard = ({course, updateCourse, deleteCourse}) => {
     const [editing, setEditing] = useState(false)
     const [title, setTitle] = useState(course.title)
 
@@ -21,14 +14,15 @@ const CourseRow = (
         updateCourse(newCourse)
     }
 
-    return(
-        <tr>
-        <td>
+
+
+    return <div className="card" style={{width: "18rem", margin: "15px"}}>
+        <img src="https://www.valuecoders.com/blog/wp-content/uploads/2016/08/react.png" className="card-img-top"
+             alt="..."/>
+        <div className="card-body">
             {
                 !editing &&
-                <Link to="/editor">
-                    {course.title}
-                </Link>
+                <h5 className="card-title">{course.title}</h5>
             }
             {
                 editing &&
@@ -37,13 +31,11 @@ const CourseRow = (
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}/>
             }
-        </td>
-        <td className="d-none d-sm-table-cell">{course.owner}</td>
-        <td className="d-none d-sm-table-cell">{course.lastModified}</td>
-        <td>
-            <i onClick={() => deleteCourse(course)} className="fas fa-trash btn mr-1"></i>
-            {/*<i onClick={() => setEditing((prevEditing) => !prevEditing)} className="fas fa-edit"></i>*/}
+            {/*<h5 className="card-title">{course.title}</h5>*/}
+            <p className="card-text">Some quick example text to build on the card title and make up the bulk of
+                the card's content.</p>
 
+            <i onClick={() => deleteCourse(course)} className="fas fa-trash btn mr-1"></i>
             {
                 editing &&
                 <i onClick={() => saveCourse()} className="fas fa-check btn"></i>
@@ -53,10 +45,11 @@ const CourseRow = (
                 !editing &&
                 <i onClick={() => setEditing(true)} className="fas fa-edit btn"></i>
             }
-
-
-        </td>
-    </tr>)
+            <Link to="/editor" className="btn btn-primary float-right">
+                Editor
+            </Link>
+        </div>
+    </div>
 }
 
-export default CourseRow
+export default CourseCard
