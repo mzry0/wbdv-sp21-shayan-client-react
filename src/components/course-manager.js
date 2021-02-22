@@ -113,6 +113,8 @@ export default class CourseManager
         </Route>
         {/*<CourseTable courses={this.state.courses}/>*/}
         {/*<CourseGrid courses={this.state.courses}/>*/}
+          <div className="float-button" onClick={this.addCourse}>
+              <i className="fa fa-plus float-button-icon" ></i></div>
       </div>
     )
   }

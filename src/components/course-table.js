@@ -20,11 +20,11 @@ export default class CourseTable extends
                     <th className="d-none d-sm-table-cell">Owned by</th>
                     <th className="d-none d-sm-table-cell">Last modified</th>
                     <th>
-                        <i className="fas fa-folder float-left fa-2x mr-3"></i>
-                        <i className="fas fa-sort-alpha-up float-left fa-2x mr-3"></i>
                         <Link to="/courses/grid">
-                            <i className="fas fa-th float-left fa-2x"></i>
+                            <i className="fas fa-th float-right fa-2x"></i>
                         </Link>
+                        <i className="fas fa-sort-alpha-up float-right fa-2x mr-3"></i>
+                        <i className="fas fa-folder float-right fa-2x mr-3"></i>
                     </th>
                 </tr>
             </thead>
