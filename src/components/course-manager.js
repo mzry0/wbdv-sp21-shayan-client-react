@@ -1,6 +1,7 @@
 import React from 'react'
 import CourseTable from "./course-table/course-table";
 import CourseGrid from "./course-grid/course-grid";
+import CourseEditor from "./course-editor/course-editor";
 import {Link, Route} from "react-router-dom";
 import courseService from "../services/course-service";
 
@@ -96,6 +97,13 @@ export default class CourseManager
               updateCourse={this.updateCourse}
               deleteCourse={this.deleteCourse}/>
         </Route>
+          <Route path={[
+              "/courses/editor/:courseId",
+              "/courses/editor/:courseId/:moduleId",
+              "/courses/editor/:courseId/:moduleId/:lessonId"]}
+                 exact={true}
+                 render={(props) => <CourseEditor {...props}/>}>
+          </Route>
           <div className="float-button cursor-pointer" onClick={this.addCourse}>
               <i className="fa fa-plus float-button-icon" ></i></div>
       </div>

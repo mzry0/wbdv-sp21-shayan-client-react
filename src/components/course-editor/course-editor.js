@@ -1,112 +1,45 @@
 import React from 'react'
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import moduleReducer from "../../reducers/module-reducer";
+import lessonReducer from "../../reducers/lesson-reducer";
+import {combineReducers, createStore} from "redux";
+import {Provider} from "react-redux";
+import ModuleList from "./module-list";
+import LessonTabs from "./lesson-tabs";
 
-const CourseEditor = ({history}) =>
-    <div>
-          <i className="fas fa-times float-right btn btn-danger fa-2x"
-             onClick={() => history.goBack()}></i>
-        <div className="container-fluid mt-3">
-            <div className="row">
-                <div className="col-4">
-                    <h1>
-                        Course Editor
-                    </h1>
-                    <ul className="list-group mt-3">
-                        <li className="list-group-item active">
-                            Module 1 - JQuery
-                            <i className="float-right fa fa-2x fa-times"></i>
-                        </li>
-                        <li className="list-group-item">
-                            Module 2 - React
-                            <i className="float-right fa fa-2x fa-times"></i>
-                        </li>
-                        <li className="list-group-item">
-                            Module 3 - Redux
-                            <i className="float-right fa fa-2x fa-times"></i>
-                        </li>
-                        <li className="list-group-item">
-                            Module 4 - Native
-                            <i className="float-right fa fa-2x fa-times"></i>
-                        </li>
-                        <li className="list-group-item">
-                            Module 5 - Angular
-                            <i className="float-right fa fa-2x fa-times"></i>
-                        </li>
-                        <li className="list-group-item">
-                            Module 6 - Node
-                            <i className="float-right fa fa-2x fa-times"></i>
-                        </li>
-                        <li className="list-group-item">
-                            Module 7 - Mongo
-                            <i className="float-right fa fa-2x fa-times"></i>
-                        </li>
-                        <li className="list-group-item">
-                            <i className="float-right fa fa-2x fa-plus"></i>
-                        </li>
-                    </ul>
+const reducer = combineReducers({
+    moduleReducer: moduleReducer,
+    lessonReducer: lessonReducer
+})
 
+// const store = createStore(moduleReducer)
+// const store = createStore(lessonReducer)
+const store = createStore(reducer)
 
-                    <a className="btn btn-danger btn-block"
-                       onClick={() => history.goBack()}>
-                        Cancel
-                    </a>
-
-                </div>
-                <div className="col-8">
-                    <ul className="nav nav-tabs">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">
-                                Build
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Pages
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Theme
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Store
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Settings
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">
-                                <i className="fa fa-plus"></i>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <br/>
-
-                    <ul className="nav nav-pills">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Topic 1</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Topic 2</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Topic 3</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">Topic 4</a>
-                        </li>
-                    </ul>
-
+const CourseEditor = ({history}) => {
+    const {courseId, moduleId} = useParams();
+    return (
+        <Provider store={store}>
+            <div>
+                <h2>
+                    <Link to="/courses/table">
+                        <i className="fas fa-arrow-left"></i>
+                    </Link>
+                    Course Editor {courseId} {moduleId}
+                    <i onClick={() => history.goBack()}
+                       className="fas fa-times float-right"></i>
+                    {/*<i onClick={() => props.history.goBack()}*/}
+                    {/*   className="fas fa-times float-right"></i>*/}
+                </h2>
+                <div className="row">
+                    <div className="col-4">
+                        <ModuleList/>
+                    </div>
+                    <div className="col-8">
+                        <LessonTabs/>
+                    </div>
                 </div>
             </div>
-        </div>
-
-    </div>
+        </Provider>)}
 
 export default CourseEditor
