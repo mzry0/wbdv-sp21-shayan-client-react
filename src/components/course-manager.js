@@ -98,10 +98,10 @@ export default class CourseManager
               deleteCourse={this.deleteCourse}/>
         </Route>
           <Route path={[
-              "/courses/editor/:courseId",
-              "/courses/editor/:courseId/:moduleId",
-              "/courses/editor/:courseId/:moduleId/:lessonId",
-              "/courses/editor/:courseId/:moduleId/:lessonId/:topicId"]}
+              "/courses/:layout/edit/:courseId",
+              "/courses/:layout/edit/:courseId/:moduleId",
+              "/courses/:layout/edit/:courseId/:moduleId/:lessonId",
+              "/courses/:layout/edit/:courseId/:moduleId/:lessonId/:topicId"]}
                  exact={true}
                  render={(props) => <CourseEditor {...props}/>}>
           </Route>

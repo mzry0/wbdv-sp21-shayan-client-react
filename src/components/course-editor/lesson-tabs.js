@@ -17,7 +17,7 @@ const LessonTabs = (
         deleteLesson,
         clearLessons
     }) => {
-    const {courseId, moduleId, lessonId} = useParams();
+    const {courseId, moduleId, lessonId, layout} = useParams();
     useEffect(() => {
         console.log("LOAD LESSONS FOR MODULE: " + moduleId)
         if(moduleId !== "undefined" && typeof moduleId !== "undefined") {
@@ -37,7 +37,7 @@ const LessonTabs = (
                             key={lesson._id}>
                             <EditableItem
                                 active={lesson._id === lessonId}
-                                to={`/courses/editor/${courseId}/${moduleId}/${lesson._id}`}
+                                to={`/courses/${layout}/edit/${courseId}/${moduleId}/${lesson._id}`}
                                 updateItem={updateLesson}
                                 deleteItem={deleteLesson}
                                 item={lesson}/>

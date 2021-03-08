@@ -15,7 +15,6 @@ const CourseCard = ({course, updateCourse, deleteCourse}) => {
     }
 
 
-
     return <div className="card" style={{width: "18rem", margin: "15px"}}>
         <img src="https://www.valuecoders.com/blog/wp-content/uploads/2016/08/react.png" className="card-img-top"
              alt="..."/>
@@ -23,7 +22,7 @@ const CourseCard = ({course, updateCourse, deleteCourse}) => {
             {
                 !editing &&
                 <h5 className="card-title">
-                    <Link to="/editor">
+                    <Link to={`/courses/grid/edit/${course._id}`}>
                         {course.title}
                     </Link>
                 </h5>
@@ -48,7 +47,7 @@ const CourseCard = ({course, updateCourse, deleteCourse}) => {
                 !editing &&
                 <i onClick={() => setEditing(true)} className="fas fa-edit btn"></i>
             }
-            <Link to="/editor" className="btn btn-primary float-right">
+            <Link to={`/courses/grid/edit/${course._id}`} className="btn btn-primary float-right">
                 Editor
             </Link>
         </div>
