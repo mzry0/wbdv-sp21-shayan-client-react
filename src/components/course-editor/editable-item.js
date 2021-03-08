@@ -10,7 +10,7 @@ const EditableItem = (
         active
     }) => {
     const [editing, setEditing] = useState(false)
-    const [cachedItem, setCahedItem] = useState(item)
+    const [cachedItem, setCachedItem] = useState(item)
     return (
         <>
             {
@@ -27,7 +27,7 @@ const EditableItem = (
                 <>
                     <input
                         onChange={(e) =>
-                            setCahedItem({
+                            setCachedItem({
                                 ...cachedItem,
                                 title: e.target.value
                             })}
