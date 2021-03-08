@@ -26,11 +26,10 @@ const CourseEditor = ({history}) => {
             <div>
                 <h2>
                     <Link to={`/courses/${layout}`}>
-                        <i className="fas fa-arrow-left"/>
+                        {/*<i className="fas fa-arrow-left"/>*/}
+                        <i className="fas fa-times float-right"/>
                     </Link>
-                    Course Editor {courseId} {moduleId}
-                    <i onClick={() => history.goBack()}
-                       className="fas fa-times float-right"/>
+                    Course Editor
                     {/*<i onClick={() => props.history.goBack()}*/}
                     {/*   className="fas fa-times float-right"></i>*/}
                 </h2>
