@@ -1,4 +1,3 @@
-const MODULES_URL = "https://wbdv-generic-server.herokuapp.com/api/001372648/modules";
 const LESSONS_URL = "https://wbdv-generic-server.herokuapp.com/api/001372648/lessons"
 const TOPICS_URL = "https://wbdv-generic-server.herokuapp.com/api/001372648/topics"
 

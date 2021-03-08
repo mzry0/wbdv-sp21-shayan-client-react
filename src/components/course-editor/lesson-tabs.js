@@ -14,13 +14,17 @@ const LessonTabs = (
         findLessonsForModule,
         createLessonForModule,
         updateLesson,
-        deleteLesson
+        deleteLesson,
+        clearLessons
     }) => {
     const {courseId, moduleId, lessonId} = useParams();
     useEffect(() => {
         console.log("LOAD LESSONS FOR MODULE: " + moduleId)
         if(moduleId !== "undefined" && typeof moduleId !== "undefined") {
             findLessonsForModule(moduleId)
+        }
+        else{
+            clearLessons()
         }
     }, [moduleId])
     return(
@@ -79,7 +83,10 @@ const dtpm = (dispatch) => ({
             .then(status => dispatch({
                 type: "UPDATE_LESSON",
                 lesson: lesson
-            }))
+            })),
+    clearLessons: () => dispatch({
+        type: "CLEAR_LESSONS"
+    })
 })
 
 export default connect(stpm, dtpm)(LessonTabs)
