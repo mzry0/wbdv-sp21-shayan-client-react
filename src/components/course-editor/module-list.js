@@ -29,13 +29,13 @@ const ModuleList = (
                                 to={`/courses/editor/${courseId}/${module._id}`}
                                 updateItem={updateModule}
                                 deleteItem={deleteModule}
-                                active={true}
+                                active={module._id === moduleId}
                                 item={module}/>
                         </li>
                     )
                 }
                 <li className="list-group-item">
-                    <i onClick={() => createModule(courseId)} className="fas fa-plus fa-2x"></i>
+                    <i onClick={() => createModule(courseId)} className="fas fa-plus fa-2x"/>
                 </li>
             </ul>
         </div>)}
