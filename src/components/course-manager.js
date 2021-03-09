@@ -1,7 +1,6 @@
 import React from 'react'
 import CourseTable from "./course-table/course-table";
 import CourseGrid from "./course-grid/course-grid";
-import CourseEditor from "./course-editor/course-editor";
 import {Link, Route} from "react-router-dom";
 import courseService from "../services/course-service";
 
@@ -65,7 +64,7 @@ export default class CourseManager
       <div className="mt-3">
           <div className="row">
               <div className="col-1">
-                  <i className="fa fa-bars fa-2x"></i>
+                  <i className="fa fa-bars fa-2x"/>
               </div>
               <div className="col-2 d-none d-sm-table-cell">
                   <h3 className="font-weight-bold">Course Manager</h3>
@@ -82,7 +81,7 @@ export default class CourseManager
                   />
               </div>
               <div className="col-1 ml-auto">
-                  <i className="fa fa-plus fa-2x btn float-right" onClick={this.addCourse}></i>
+                  <i className="fa fa-plus fa-2x btn float-right" onClick={this.addCourse}/>
               </div>
           </div>
         <Route path="/courses/table" exact={true} >
@@ -98,7 +97,7 @@ export default class CourseManager
               deleteCourse={this.deleteCourse}/>
         </Route>
           <div className="float-button cursor-pointer" onClick={this.addCourse}>
-              <i className="fa fa-plus float-button-icon" ></i></div>
+              <i className="fa fa-plus float-button-icon"/></div>
       </div>
     )
   }

@@ -28,7 +28,7 @@ const CourseEditor = ({history}) => {
                     {/*<i className="fas fa-arrow-left"/>*/}
                     <i className="fas fa-times float-right btn btn-danger fa-2x"/>
                 </Link>
-                <h3>
+                <h3 className="font-weight-bold">
                     Course Editor
                     {/*<i onClick={() => props.history.goBack()}*/}
                     {/*   className="fas fa-times float-right"></i>*/}
