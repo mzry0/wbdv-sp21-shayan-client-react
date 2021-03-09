@@ -97,18 +97,9 @@ export default class CourseManager
               updateCourse={this.updateCourse}
               deleteCourse={this.deleteCourse}/>
         </Route>
-          <Route path={[
-              "/courses/:layout/edit/:courseId",
-              "/courses/:layout/edit/:courseId/:moduleId",
-              "/courses/:layout/edit/:courseId/:moduleId/:lessonId",
-              "/courses/:layout/edit/:courseId/:moduleId/:lessonId/:topicId"]}
-                 exact={true}
-                 render={(props) => <CourseEditor {...props}/>}>
-          </Route>
           <div className="float-button cursor-pointer" onClick={this.addCourse}>
               <i className="fa fa-plus float-button-icon" ></i></div>
       </div>
     )
   }
 }
-// export default CourseManager
