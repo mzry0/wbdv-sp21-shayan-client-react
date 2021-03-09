@@ -17,18 +17,19 @@ const EditableItem = (
             key={item._id}>
             {
                 !editing &&
-                <>
-                    <Link className={`nav-link ${active?'active':''} d-inline`} to={to}>
+                <span className="m-1">
+                    <Link className={`nav-link ${active?'active':''} d-inline m-1`} to={to}>
                         {item.title}
                     </Link>
-                    <i onClick={() => setEditing(true)} className="fas fa-edit float-right"/>
-                </>
+                    <i onClick={() => setEditing(true)} className="fas fa-edit float-right m-1 btn"/>
+                </span>
             }
             {
                 editing &&
                 <>
                     <span className="nav-link active">
                     <input
+                        className="m-1"
                         onChange={(e) =>
                             setCachedItem({
                                 ...cachedItem,
@@ -38,8 +39,8 @@ const EditableItem = (
                     <i onClick={() => {
                         setEditing(false)
                         updateItem(cachedItem)
-                    }} className="fas fa-check float-right"/>
-                    <i onClick={() => deleteItem(item)} className="fas fa-times float-right"/>
+                    }} className="fas fa-check float-right m-1 btn"/>
+                    <i onClick={() => deleteItem(item)} className="fas fa-times float-right m-1 btn"/>
                     </span>
                 </>
             }

@@ -3,6 +3,7 @@ import CourseManager from "./components/course-manager";
 import CourseEditor from "./components/course-editor/course-editor";
 import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./components/home"
+import OldEditor from "./components/course-editor/course-editor-old"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
                  exact={true}
                  render={(props) => <CourseEditor {...props}/>}>
           </Route>
+              <Route path="/old-editor" exact={true} component={OldEditor}></Route>
           {/*<Route path="/editor" component={CourseEditor}/>*/}
           {/*<Route path="/editor" exact={true} render={(props) => <CourseEditor {...props}/>}/>*/}
         {/*<div className="container-fluid">*/}

@@ -15,3 +15,6 @@ code {
 .list-group-item.active a {
   color: white;
 }
+/*.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {*/
+/*  border: 0;*/
+/*}*/

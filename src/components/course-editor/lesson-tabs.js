@@ -30,7 +30,7 @@ const LessonTabs = (
     return(
         <div>
             <h4>Lessons</h4>
-            <ul className="nav nav-pills">
+            <ul className="nav nav-pills mt-4">
                 {
                     lessons.map(lesson =>
                             <EditableItem
@@ -45,7 +45,7 @@ const LessonTabs = (
                     )
                 }
                 <li>
-                    <i onClick={() => createLessonForModule(moduleId)} className="fas fa-plus"></i>
+                    <i onClick={() => createLessonForModule(moduleId)} className="fas fa-plus ml-2 btn"/>
                 </li>
             </ul>
         </div>)}

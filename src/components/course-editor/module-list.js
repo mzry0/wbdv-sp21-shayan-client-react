@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import EditableItem from "./editable-item";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import moduleService from "../../services/module-service"
 
 const ModuleList = (
@@ -19,7 +19,7 @@ const ModuleList = (
     }, [])
     return(
         <div>
-            <h4>Modules</h4>
+            <h4 className="mb-3">Modules</h4>
             <ul className="list-group">
                 {
                     myModules.map(module =>
@@ -35,8 +35,14 @@ const ModuleList = (
                     )
                 }
                 <li className="list-group-item">
-                    <i onClick={() => createModule(courseId)} className="fas fa-plus fa-2x"/>
+                    <i onClick={() => createModule(courseId)} className="fas fa-plus fa-2x float-right btn"/>
                 </li>
+                <Link className="btn btn-danger btn-block" to={`/courses/${layout}`}>
+                {/*<a className="btn btn-danger btn-block"*/}
+                {/*   onClick={() => history.goBack()}>*/}
+                    Cancel
+                {/*</a>*/}
+                </Link>
             </ul>
         </div>)}
 
