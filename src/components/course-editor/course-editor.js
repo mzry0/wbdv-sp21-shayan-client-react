@@ -23,17 +23,17 @@ const CourseEditor = ({history}) => {
     const {courseId, moduleId, layout} = useParams();
     return (
         <Provider store={store}>
-            <div>
-                <h2>
-                    <Link to={`/courses/${layout}`}>
-                        {/*<i className="fas fa-arrow-left"/>*/}
-                        <i className="fas fa-times float-right"/>
-                    </Link>
+            <div className="container-fluid mt-3">
+                <Link to={`/courses/${layout}`}>
+                    {/*<i className="fas fa-arrow-left"/>*/}
+                    <i className="fas fa-times float-right btn btn-danger fa-2x"/>
+                </Link>
+                <h3>
                     Course Editor
                     {/*<i onClick={() => props.history.goBack()}*/}
                     {/*   className="fas fa-times float-right"></i>*/}
-                </h2>
-                <div className="row">
+                </h3>
+                <div className="row mt-3">
                     <div className="col-4">
                         <ModuleList/>
                     </div>

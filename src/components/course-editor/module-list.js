@@ -19,7 +19,7 @@ const ModuleList = (
     }, [])
     return(
         <div>
-            <h2>Modules</h2>
+            <h4>Modules</h4>
             <ul className="list-group">
                 {
                     myModules.map(module =>

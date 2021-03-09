@@ -29,7 +29,7 @@ const LessonTabs = (
     }, [moduleId])
     return(
         <div>
-            <h2>Lessons</h2>
+            <h4>Lessons</h4>
             <ul className="nav nav-pills">
                 {
                     lessons.map(lesson =>

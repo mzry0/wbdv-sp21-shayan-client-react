@@ -68,7 +68,7 @@ export default class CourseManager
                   <i className="fa fa-bars fa-2x"></i>
               </div>
               <div className="col-2 d-none d-sm-table-cell">
-                  <h3>Course Manager</h3>
+                  <h3 className="font-weight-bold">Course Manager</h3>
               </div>
               <div className="col-8">
                   <input className="form-control"
