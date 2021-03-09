@@ -33,15 +33,15 @@ const LessonTabs = (
             <ul className="nav nav-pills">
                 {
                     lessons.map(lesson =>
-                        <li className="nav-item"
-                            key={lesson._id}>
                             <EditableItem
                                 active={lesson._id === lessonId}
                                 to={`/courses/${layout}/edit/${courseId}/${moduleId}/${lesson._id}`}
                                 updateItem={updateLesson}
                                 deleteItem={deleteLesson}
-                                item={lesson}/>
-                        </li>
+                                item={lesson}
+                                listItemType="nav-item"
+                                key={lesson._id}
+                            />
                     )
                 }
                 <li>
