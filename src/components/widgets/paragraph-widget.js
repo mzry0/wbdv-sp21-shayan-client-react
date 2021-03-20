@@ -1,23 +1,23 @@
 import React, {useState, useEffect} from 'react'
-import WidgetType from "../course-editor/widget-type";
+import WidgetType from "./widget-type";
 
-const ParagraphWidget = ({widget, setWidget, editing}) => {
+const ParagraphWidget = ({widgetActive, widgetListItem, setWidget, editing}) => {
     return (
         <div>
             {
                 editing &&
                 <div>
-                    <WidgetType widget={widget} setWidget={setWidget}/>
+                    <WidgetType widget={widgetActive} setWidget={setWidget}/>
                     <textarea
-                        onChange={(e) => setWidget({...widget, text: e.target.value})}
-                        value={widget.text}
+                        onChange={(e) => setWidget({...widgetActive, text: e.target.value})}
+                        value={widgetActive.text}
                         className="form-control"/>
                 </div>
             }
             {
                 !editing &&
                 <p>
-                    {widget.text}
+                    {widgetListItem.text}
                 </p>
             }
         </div>

@@ -75,14 +75,16 @@ const WidgetList = () => {
                                 <HeadingWidget
                                     setWidget={setWidget}
                                     editing={_widget.id === widget.id}
-                                    widget={widget}/>
+                                    widgetActive={widget}
+                                    widgetListItem={_widget}/>
                             }
                             {
                                 _widget.type === "PARAGRAPH" &&
                                 <ParagraphWidget
                                     setWidget={setWidget}
                                     editing={_widget.id === widget.id}
-                                    widget={_widget}/>
+                                    widgetActive={widget}
+                                    widgetListItem={_widget}/>
                             }
                         </li>
                     )
