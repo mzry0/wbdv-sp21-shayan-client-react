@@ -4,7 +4,6 @@ import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
 import {useParams} from "react-router-dom"
 import widgetService from "../../services/widget-service"
-import topicService from "../../services/topic-service";
 
 const WidgetList = ({
                         widgets,
@@ -16,38 +15,14 @@ const WidgetList = ({
                         setActiveWidget
                     }) => {
     const {topicId} = useParams()
-    // TODO: move all state handling to widgets-reducer.js
-    // const [widgets, setWidgets] = useState([])
-    // const [widget, setWidget] = useState({})
     useEffect(() => {
-        // widgetService.findWidgetsForTopic(topicId)
-        //     .then(widgets => setWidgets(widgets))
         findWidgetsForTopic(topicId)
     }, [topicId])
 
-    // const createWidget = () => {
-    //     const newWidget = {type: "HEADING", size: 2, text: "New Widget"}
-    //     widgetService.createWidgetForTopic(topicId, newWidget)
-    //         .then(widget => setWidgets((widgets) => [...widgets, widget]))
-    // }
-    //
-    // const deleteWidget = (id) =>
-    //     widgetService.deleteWidget(id)
-    //     .then((status) => {
-    //         setWidgets((widgets) => widgets.filter(w => w.id !== id))
-    //     })
-
-    // const updateWidget = (id, widget) =>
-    //     widgetService.updateWidget(id, widget).
-    //     then((status) => {
-    //         setWidget({})
-    //         setWidgets((widgets) => widgets.map(w => w.id === id ? widget : w))
-    //     })
-
     return(
         <div>
-            <i onClick={() => createWidgetForTopic(topicId)} className="fas fa-plus float-right fa-2x"/>
-            <h1>Widget List {activeWidget.id}</h1>
+            <i onClick={() => createWidgetForTopic(topicId)} className="fas fa-plus btn float-right"/>
+            <h4>Widgets</h4>
             <ul className="list-group">
                 {
                     widgets
@@ -57,10 +32,10 @@ const WidgetList = ({
                         {
                             _widget.id === activeWidget.id &&
                             <>
-                                <i onClick={() => deleteWidget(_widget.id)} className="fas fa-trash float-right"/>
+                                <i onClick={() => deleteWidget(_widget.id)} className="fas btn fa-trash float-right"/>
                                 <i onClick={() => {
                                     updateWidget(_widget.id, activeWidget)
-                                }} className="fas fa-check float-right"/>
+                                }} className="fas btn fa-check float-right"/>
 
                                 {
                                     activeWidget.type === "HEADING" &&
@@ -83,7 +58,7 @@ const WidgetList = ({
                         {
                             _widget.id !== activeWidget.id &&
                             <div>
-                                <i onClick={() => setActiveWidget(_widget)} className="fas fa-cog float-right"/>
+                                <i onClick={() => setActiveWidget(_widget)} className="fas btn fa-cog float-right"/>
                                 {
                                     _widget.type === "HEADING" &&
                                     <HeadingWidget
@@ -132,11 +107,6 @@ const dtpm = (dispatch) => ({
                 widget
             }))
     },
-    // const deleteWidget = (id) =>
-        // widgetService.deleteWidget(id)
-        //     .then((status) => {
-        //         setWidgets((widgets) => widgets.filter(w => w.id !== id))
-        //     })
     deleteWidget: (id) =>
         widgetService.deleteWidget(id)
             .then((status) => {
@@ -146,12 +116,6 @@ const dtpm = (dispatch) => ({
                     widgetToDelete: id
                 })
             }),
-
-    // widgetService.updateWidget(id, widget).
-    // then((status) => {
-    //     setWidget({})
-    //     setWidgets((widgets) => widgets.map(w => w.id === id ? widget : w))
-    // })
 
     updateWidget: (id, widget) =>
         widgetService.updateWidget(id, widget).
@@ -164,8 +128,6 @@ const dtpm = (dispatch) => ({
                 type: "UPDATE_WIDGET",
                 widget
             })
-            // setWidget({})=
-            // setWidgets((widgets) => widgets.map(w => w.id === id ? widget : w))
         }),
     setActiveWidget: (widget) => {
         dispatch({
@@ -173,15 +135,6 @@ const dtpm = (dispatch) => ({
             activeWidget: widget
         })
     }
-        // topicService.updateTopic(topic._id, topic)
-        //     .then(status => dispatch({
-        //         type: "UPDATE_TOPIC",
-        //         topic
-        //     })),
-    // cleanState: () =>
-    //     dispatch({
-    //         type: "CLEAN_STATE"
-    //     })
 })
 
 export default connect(stpm, dtpm)(WidgetList)
