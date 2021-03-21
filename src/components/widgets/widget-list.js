@@ -64,27 +64,46 @@ const WidgetList = () => {
                                     <i onClick={() => {
                                         updateWidget(_widget.id, widget)
                                     }} className="fas fa-check float-right"/>
+
+                                    {
+                                        widget.type === "HEADING" &&
+                                        <HeadingWidget
+                                            setWidget={setWidget}
+                                            editing={_widget.id === widget.id}
+                                            widgetActive={widget}
+                                            widgetListItem={_widget}/>
+                                    }
+                                    {
+                                        widget.type === "PARAGRAPH" &&
+                                        <ParagraphWidget
+                                            setWidget={setWidget}
+                                            editing={_widget.id === widget.id}
+                                            widgetActive={widget}
+                                            widgetListItem={_widget}/>
+                                    }
                                 </>
                             }
                             {
                                 _widget.id !== widget.id &&
-                                <i onClick={() => setWidget(_widget)} className="fas fa-cog float-right"/>
-                            }
-                            {
-                                _widget.type === "HEADING" &&
-                                <HeadingWidget
-                                    setWidget={setWidget}
-                                    editing={_widget.id === widget.id}
-                                    widgetActive={widget}
-                                    widgetListItem={_widget}/>
-                            }
-                            {
-                                _widget.type === "PARAGRAPH" &&
-                                <ParagraphWidget
-                                    setWidget={setWidget}
-                                    editing={_widget.id === widget.id}
-                                    widgetActive={widget}
-                                    widgetListItem={_widget}/>
+                                <div>
+                                    <i onClick={() => setWidget(_widget)} className="fas fa-cog float-right"/>
+                                    {
+                                        _widget.type === "HEADING" &&
+                                        <HeadingWidget
+                                            setWidget={setWidget}
+                                            editing={_widget.id === widget.id}
+                                            widgetActive={widget}
+                                            widgetListItem={_widget}/>
+                                    }
+                                    {
+                                        _widget.type === "PARAGRAPH" &&
+                                        <ParagraphWidget
+                                            setWidget={setWidget}
+                                            editing={_widget.id === widget.id}
+                                            widgetActive={widget}
+                                            widgetListItem={_widget}/>
+                                    }
+                                </div>
                             }
                         </li>
                     )
