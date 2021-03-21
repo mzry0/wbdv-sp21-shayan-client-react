@@ -1,3 +1,5 @@
+import {CLEAN_STATE, CREATE_TOPIC, DELETE_TOPIC, FIND_TOPICS_FOR_LESSON, UPDATE_TOPIC} from "../actions/topic-actions";
+
 const initialState = {
     topics: [
         // {_id: 123, title: "Module 123"},
@@ -7,16 +9,15 @@ const initialState = {
 }
 
 const topicReducer = (state=initialState, action) => {
-    console.log('reducer reached')
     switch (action.type) {
-        case "FIND_TOPICS_FOR_LESSON":
+        case FIND_TOPICS_FOR_LESSON:
             console.log('dispatch reached')
             console.log(action.topics)
             return {
                 ...state,
                 topics: action.topics
             }
-        case "CREATE_TOPIC":
+        case CREATE_TOPIC:
             const newState = {
                 topics: [
                     ...state.topics,
@@ -28,7 +29,7 @@ const topicReducer = (state=initialState, action) => {
                 ]
             }
             return newState
-        case "DELETE_TOPIC":
+        case DELETE_TOPIC:
             // alert("delete the module " + action.moduleToDelete.title)
             const newState1 = {
                 topics: state.topics.filter(topic => {
@@ -40,7 +41,7 @@ const topicReducer = (state=initialState, action) => {
                 })
             }
             return newState1
-        case "UPDATE_TOPIC":
+        case UPDATE_TOPIC:
             return {
                 topics: state.topics.map(topic => {
                     if(topic._id === action.topic._id) {
@@ -50,7 +51,7 @@ const topicReducer = (state=initialState, action) => {
                     }
                 })
             }
-        case "CLEAN_STATE":
+        case CLEAN_STATE:
             const newState2 = {
                 ...state,
                 topics: []

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {connect} from "react-redux";
 import EditableItem from "./editable-item";
 import {useParams} from "react-router-dom";
-import topicService from '../../services/topic-service'
+import topicActions from "../../actions/topic-actions";
 
 const TopicPills = (
     {
@@ -54,43 +54,11 @@ const stpm = (state) => ({
     topics: state.topicReducer.topics
 })
 const dtpm = (dispatch) => ({
-    findTopicsForLesson: (lessonId) => {
-        console.log("LOAD TOPICS FOR LESSON:")
-        console.log(lessonId)
-        topicService.findTopicsForLesson(lessonId)
-            .then(topics => {
-                console.log(topics)
-                dispatch({
-                    type: "FIND_TOPICS_FOR_LESSON",
-                    topics
-                })
-            })
-    },
-    createTopicForLesson: (lessonId) => {
-        console.log("CREATE TOPIC FOR LESSON: " + lessonId)
-        topicService
-            .createTopicForLesson(lessonId, {title: "New Topic"})
-            .then(topic => dispatch({
-                type: "CREATE_TOPIC",
-                topic
-            }))
-    },
-    deleteTopic: (item) =>
-        topicService.deleteTopic(item._id)
-            .then(status => dispatch({
-                type: "DELETE_TOPIC",
-                topicToDelete: item
-            })),
-    updateTopic: (topic) =>
-        topicService.updateTopic(topic._id, topic)
-            .then(status => dispatch({
-                type: "UPDATE_TOPIC",
-                topic
-            })),
-    cleanState: () =>
-        dispatch({
-            type: "CLEAN_STATE"
-        })
+    findTopicsForLesson: (lessonId) => topicActions.findTopicsForLesson(dispatch, lessonId),
+    createTopicForLesson: (lessonId) => topicActions.createTopicForLesson(dispatch, lessonId),
+    deleteTopic: (item) => topicActions.deleteTopic(dispatch, item),
+    updateTopic: (topic) => topicActions.updateTopic(dispatch, topic),
+    cleanState: () => topicActions.cleanState(dispatch)
 })
 
 export default connect(stpm, dtpm)(TopicPills)
