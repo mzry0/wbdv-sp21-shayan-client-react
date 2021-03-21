@@ -100,7 +100,7 @@ const dtpm = (dispatch) => ({
             })
     },
     createWidgetForTopic: (topicId) => {
-        const newWidget = {type: "HEADING", size: 2, text: "New Widget"}
+        const newWidget = {type: "HEADING", size: 1, text: "New Widget"}
         widgetService.createWidgetForTopic(topicId, newWidget)
             .then(widget => dispatch({
                 type: "CREATE_WIDGET",
@@ -110,7 +110,6 @@ const dtpm = (dispatch) => ({
     deleteWidget: (id) =>
         widgetService.deleteWidget(id)
             .then((status) => {
-                // setWidgets((widgets) => widgets.filter(w => w.id !== id))
                 dispatch({
                     type: "DELETE_WIDGET",
                     widgetToDelete: id

@@ -53,12 +53,6 @@ const widgetReducer = (state=initialState, action) => {
                 ...state,
                 activeWidget: action.activeWidget
             }
-        // case "CLEAN_STATE":
-        //     const newState2 = {
-        //         ...state,
-        //         topics: []
-        //     }
-        //     return newState2
         default:
             return state
     }
