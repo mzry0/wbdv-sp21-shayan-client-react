@@ -24,14 +24,13 @@ const HeadingWidget = ({widgetActive, widgetListItem, setWidget, editing}) =>
                 {widgetActive.size === 6 && <h6>{widgetActive.text}</h6>}
                 <WidgetType widget={widgetActive} setWidget={setWidget}/>
                 <input onChange={(e) =>
-                    setWidget(widget =>
-                        ({...widget, text: e.target.value})
+                    setWidget(
+                        {...widgetActive, text: e.target.value}
                     )}
                        value={widgetActive.text}
                        className="form-control"/>
                 <select onChange={(e) =>
-                    setWidget(widget =>
-                        ({...widget, size: parseInt(e.target.value)}))}
+                    setWidget({...widgetActive, size: parseInt(e.target.value)})}
                         value={widgetActive.size}
                         className="form-control">
                     <option value={1}>Heading 1</option>

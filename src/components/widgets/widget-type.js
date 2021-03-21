@@ -5,8 +5,7 @@ const WidgetType = ({widget, setWidget}) => {
         <div>
             <select onChange={(e) => {
                         console.log("widget-type onChange called")
-                        setWidget(
-                            widget => ({...widget, type: e.target.value}))
+                        setWidget({...widget, type: e.target.value})
                         }}
                     value={widget.type}
                     className="form-control">

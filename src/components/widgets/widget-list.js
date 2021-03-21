@@ -1,119 +1,187 @@
 import React, {useState, useEffect} from 'react'
+import {connect} from "react-redux";
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
 import {useParams} from "react-router-dom"
 import widgetService from "../../services/widget-service"
+import topicService from "../../services/topic-service";
 
-const WidgetList = () => {
+const WidgetList = ({
+                        widgets,
+                        activeWidget,
+                        findWidgetsForTopic,
+                        createWidgetForTopic,
+                        deleteWidget,
+                        updateWidget,
+                        setActiveWidget
+                    }) => {
     const {topicId} = useParams()
     // TODO: move all state handling to widgets-reducer.js
-    const [widgets, setWidgets] = useState([])
-    const [widget, setWidget] = useState({})
+    // const [widgets, setWidgets] = useState([])
+    // const [widget, setWidget] = useState({})
     useEffect(() => {
-        widgetService.findWidgetsForTopic(topicId)
-        // fetch(`http://localhost:8080/api/topics/${topicId}/widgets`)
-        //     .then(response => response.json())
-            .then(widgets => setWidgets(widgets))
+        // widgetService.findWidgetsForTopic(topicId)
+        //     .then(widgets => setWidgets(widgets))
+        findWidgetsForTopic(topicId)
     }, [topicId])
 
-    const createWidget = () => {
-        const newWidget = {type: "HEADING", size: 2, text: "New Widget"}
-        widgetService.createWidgetForTopic(topicId, newWidget)
-        // fetch(`http://localhost:8080/api/topics/${topicId}/widgets`, {
-        //     method: 'POST',
-        //     body: JSON.stringify({type: "HEADING", size: 2, text: "New Widget"}),
-        //     headers: {
-        //         "content-type": 'application/json'
-        //     }
-        // })
-        //     .then(response => response.json())
-            .then(widget => setWidgets((widgets) => [...widgets, widget]))
-    }
+    // const createWidget = () => {
+    //     const newWidget = {type: "HEADING", size: 2, text: "New Widget"}
+    //     widgetService.createWidgetForTopic(topicId, newWidget)
+    //         .then(widget => setWidgets((widgets) => [...widgets, widget]))
+    // }
+    //
+    // const deleteWidget = (id) =>
+    //     widgetService.deleteWidget(id)
+    //     .then((status) => {
+    //         setWidgets((widgets) => widgets.filter(w => w.id !== id))
+    //     })
 
-    const deleteWidget = (id) =>
-        widgetService.deleteWidget(id)
-        // fetch(`http://localhost:8080/api/widgets/${id}`, {
-        //     method: "DELETE" })
-        .then((status) => {
-            setWidgets((widgets) => widgets.filter(w => w.id !== id))
-        })
-
-    const updateWidget = (id, widget) =>
-        // fetch(`http://localhost:8080/api/widgets/${id}`, {
-        //     method: "PUT",
-        //     body: JSON.stringify(widget),
-        //     headers: {
-        //         "content-type": 'application/json'
-        //     }
-        // }).
-        widgetService.updateWidget(id, widget).
-        then((status) => {
-            setWidget({})
-            setWidgets((widgets) => widgets.map(w => w.id === id ? widget : w))
-        })
+    // const updateWidget = (id, widget) =>
+    //     widgetService.updateWidget(id, widget).
+    //     then((status) => {
+    //         setWidget({})
+    //         setWidgets((widgets) => widgets.map(w => w.id === id ? widget : w))
+    //     })
 
     return(
         <div>
-            <i onClick={createWidget} className="fas fa-plus float-right fa-2x"/>
-            <h1>Widget List {widget.id}</h1>
+            <i onClick={() => createWidgetForTopic(topicId)} className="fas fa-plus float-right fa-2x"/>
+            <h1>Widget List {activeWidget.id}</h1>
             <ul className="list-group">
                 {
+                    widgets
+                    &&
                     widgets.map(_widget =>
-                        <li key={_widget.id} className="list-group-item">
-                            {
-                                _widget.id === widget.id &&
-                                <>
-                                    <i onClick={() => deleteWidget(_widget.id)} className="fas fa-trash float-right"/>
-                                    <i onClick={() => {
-                                        updateWidget(_widget.id, widget)
-                                    }} className="fas fa-check float-right"/>
+                    <li key={_widget.id} className="list-group-item">
+                        {
+                            _widget.id === activeWidget.id &&
+                            <>
+                                <i onClick={() => deleteWidget(_widget.id)} className="fas fa-trash float-right"/>
+                                <i onClick={() => {
+                                    updateWidget(_widget.id, activeWidget)
+                                }} className="fas fa-check float-right"/>
 
-                                    {
-                                        widget.type === "HEADING" &&
-                                        <HeadingWidget
-                                            setWidget={setWidget}
-                                            editing={_widget.id === widget.id}
-                                            widgetActive={widget}
-                                            widgetListItem={_widget}/>
-                                    }
-                                    {
-                                        widget.type === "PARAGRAPH" &&
-                                        <ParagraphWidget
-                                            setWidget={setWidget}
-                                            editing={_widget.id === widget.id}
-                                            widgetActive={widget}
-                                            widgetListItem={_widget}/>
-                                    }
-                                </>
-                            }
-                            {
-                                _widget.id !== widget.id &&
-                                <div>
-                                    <i onClick={() => setWidget(_widget)} className="fas fa-cog float-right"/>
-                                    {
-                                        _widget.type === "HEADING" &&
-                                        <HeadingWidget
-                                            setWidget={setWidget}
-                                            editing={_widget.id === widget.id}
-                                            widgetActive={widget}
-                                            widgetListItem={_widget}/>
-                                    }
-                                    {
-                                        _widget.type === "PARAGRAPH" &&
-                                        <ParagraphWidget
-                                            setWidget={setWidget}
-                                            editing={_widget.id === widget.id}
-                                            widgetActive={widget}
-                                            widgetListItem={_widget}/>
-                                    }
-                                </div>
-                            }
-                        </li>
-                    )
+                                {
+                                    activeWidget.type === "HEADING" &&
+                                    <HeadingWidget
+                                        setWidget={setActiveWidget}
+                                        editing={_widget.id === activeWidget.id}
+                                        widgetActive={activeWidget}
+                                        widgetListItem={_widget}/>
+                                }
+                                {
+                                    activeWidget.type === "PARAGRAPH" &&
+                                    <ParagraphWidget
+                                        setWidget={setActiveWidget}
+                                        editing={_widget.id === activeWidget.id}
+                                        widgetActive={activeWidget}
+                                        widgetListItem={_widget}/>
+                                }
+                            </>
+                        }
+                        {
+                            _widget.id !== activeWidget.id &&
+                            <div>
+                                <i onClick={() => setActiveWidget(_widget)} className="fas fa-cog float-right"/>
+                                {
+                                    _widget.type === "HEADING" &&
+                                    <HeadingWidget
+                                        setWidget={setActiveWidget}
+                                        editing={_widget.id === activeWidget.id}
+                                        widgetActive={activeWidget}
+                                        widgetListItem={_widget}/>
+                                }
+                                {
+                                    _widget.type === "PARAGRAPH" &&
+                                    <ParagraphWidget
+                                        setWidget={setActiveWidget}
+                                        editing={_widget.id === activeWidget.id}
+                                        widgetActive={activeWidget}
+                                        widgetListItem={_widget}/>
+                                }
+                            </div>
+                        }
+                    </li>
+                )
                 }
             </ul>
         </div>
-    )
-}
+    )}
 
-export default WidgetList
+const stpm = (state) => (
+{
+    widgets: state.widgetReducer.widgets,
+    activeWidget: state.widgetReducer.activeWidget
+})
+const dtpm = (dispatch) => ({
+    findWidgetsForTopic: (topicId) => {
+        widgetService.findWidgetsForTopic(topicId)
+            .then(widgets => {
+                dispatch({
+                    type: "FIND_WIDGETS_FOR_TOPIC",
+                    widgets
+                })
+            })
+    },
+    createWidgetForTopic: (topicId) => {
+        const newWidget = {type: "HEADING", size: 2, text: "New Widget"}
+        widgetService.createWidgetForTopic(topicId, newWidget)
+            .then(widget => dispatch({
+                type: "CREATE_WIDGET",
+                widget
+            }))
+    },
+    // const deleteWidget = (id) =>
+        // widgetService.deleteWidget(id)
+        //     .then((status) => {
+        //         setWidgets((widgets) => widgets.filter(w => w.id !== id))
+        //     })
+    deleteWidget: (id) =>
+        widgetService.deleteWidget(id)
+            .then((status) => {
+                // setWidgets((widgets) => widgets.filter(w => w.id !== id))
+                dispatch({
+                    type: "DELETE_WIDGET",
+                    widgetToDelete: id
+                })
+            }),
+
+    // widgetService.updateWidget(id, widget).
+    // then((status) => {
+    //     setWidget({})
+    //     setWidgets((widgets) => widgets.map(w => w.id === id ? widget : w))
+    // })
+
+    updateWidget: (id, widget) =>
+        widgetService.updateWidget(id, widget).
+        then((status) => {
+            dispatch({
+                type: "SET_ACTIVE_WIDGET",
+                activeWidget: {}
+            })
+            dispatch({
+                type: "UPDATE_WIDGET",
+                widget
+            })
+            // setWidget({})=
+            // setWidgets((widgets) => widgets.map(w => w.id === id ? widget : w))
+        }),
+    setActiveWidget: (widget) => {
+        dispatch({
+            type:"SET_ACTIVE_WIDGET",
+            activeWidget: widget
+        })
+    }
+        // topicService.updateTopic(topic._id, topic)
+        //     .then(status => dispatch({
+        //         type: "UPDATE_TOPIC",
+        //         topic
+        //     })),
+    // cleanState: () =>
+    //     dispatch({
+    //         type: "CLEAN_STATE"
+    //     })
+})
+
+export default connect(stpm, dtpm)(WidgetList)
