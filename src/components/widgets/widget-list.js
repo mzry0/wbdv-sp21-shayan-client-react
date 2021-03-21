@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
 import {useParams} from "react-router-dom"
-import widgetService from "../../services/widget-service"
+import widgetActions from "../../actions/widget-actions";
 
 const WidgetList = ({
                         widgets,
@@ -90,50 +90,11 @@ const stpm = (state) => (
     activeWidget: state.widgetReducer.activeWidget
 })
 const dtpm = (dispatch) => ({
-    findWidgetsForTopic: (topicId) => {
-        widgetService.findWidgetsForTopic(topicId)
-            .then(widgets => {
-                dispatch({
-                    type: "FIND_WIDGETS_FOR_TOPIC",
-                    widgets
-                })
-            })
-    },
-    createWidgetForTopic: (topicId) => {
-        const newWidget = {type: "HEADING", size: 1, text: "New Widget"}
-        widgetService.createWidgetForTopic(topicId, newWidget)
-            .then(widget => dispatch({
-                type: "CREATE_WIDGET",
-                widget
-            }))
-    },
-    deleteWidget: (id) =>
-        widgetService.deleteWidget(id)
-            .then((status) => {
-                dispatch({
-                    type: "DELETE_WIDGET",
-                    widgetToDelete: id
-                })
-            }),
-
-    updateWidget: (id, widget) =>
-        widgetService.updateWidget(id, widget).
-        then((status) => {
-            dispatch({
-                type: "SET_ACTIVE_WIDGET",
-                activeWidget: {}
-            })
-            dispatch({
-                type: "UPDATE_WIDGET",
-                widget
-            })
-        }),
-    setActiveWidget: (widget) => {
-        dispatch({
-            type:"SET_ACTIVE_WIDGET",
-            activeWidget: widget
-        })
-    }
+    findWidgetsForTopic: (topicId) => widgetActions.findWidgetsForTopic(dispatch, topicId),
+    createWidgetForTopic: (topicId) => widgetActions.createWidgetForTopic(dispatch, topicId),
+    deleteWidget: (id) => widgetActions.deleteWidget(dispatch, id),
+    updateWidget: (id, widget) => widgetActions.updateWidget(dispatch, id, widget),
+    setActiveWidget: (widget) => widgetActions.setActiveWidget(dispatch, widget)
 })
 
 export default connect(stpm, dtpm)(WidgetList)
