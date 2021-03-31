@@ -5,6 +5,7 @@ import ParagraphWidget from "./paragraph-widget";
 import {useParams} from "react-router-dom"
 import widgetActions from "../../actions/widget-actions";
 import ImageWidget from "./image-widget";
+import ListWidget from "./list-widget";
 
 const WidgetList = ({
                         widgets,
@@ -21,7 +22,7 @@ const WidgetList = ({
     }, [topicId])
 
     return(
-        <div>
+        <div className="mb-5">
             <i onClick={() => createWidgetForTopic(topicId)} className="fas fa-plus btn float-right"/>
             <h4>Widgets</h4>
             <ul className="list-group">
@@ -62,6 +63,14 @@ const WidgetList = ({
                                         widgetActive={activeWidget}
                                         widgetListItem={_widget}/>
                                 }
+                                {
+                                    activeWidget.type === "LIST" &&
+                                    <ListWidget
+                                        setWidget={setActiveWidget}
+                                        editing={_widget.id === activeWidget.id}
+                                        widgetActive={activeWidget}
+                                        widgetListItem={_widget}/>
+                                }
                             </>
                         }
                         {
@@ -87,6 +96,14 @@ const WidgetList = ({
                                 {
                                     _widget.type === "IMAGE" &&
                                     <ImageWidget
+                                        setWidget={setActiveWidget}
+                                        editing={_widget.id === activeWidget.id}
+                                        widgetActive={activeWidget}
+                                        widgetListItem={_widget}/>
+                                }
+                                {
+                                    _widget.type === "LIST" &&
+                                    <ListWidget
                                         setWidget={setActiveWidget}
                                         editing={_widget.id === activeWidget.id}
                                         widgetActive={activeWidget}
