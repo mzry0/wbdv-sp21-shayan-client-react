@@ -4,6 +4,7 @@ import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
 import {useParams} from "react-router-dom"
 import widgetActions from "../../actions/widget-actions";
+import ImageWidget from "./image-widget";
 
 const WidgetList = ({
                         widgets,
@@ -53,6 +54,14 @@ const WidgetList = ({
                                         widgetActive={activeWidget}
                                         widgetListItem={_widget}/>
                                 }
+                                {
+                                    activeWidget.type === "IMAGE" &&
+                                    <ImageWidget
+                                        setWidget={setActiveWidget}
+                                        editing={_widget.id === activeWidget.id}
+                                        widgetActive={activeWidget}
+                                        widgetListItem={_widget}/>
+                                }
                             </>
                         }
                         {
@@ -70,6 +79,14 @@ const WidgetList = ({
                                 {
                                     _widget.type === "PARAGRAPH" &&
                                     <ParagraphWidget
+                                        setWidget={setActiveWidget}
+                                        editing={_widget.id === activeWidget.id}
+                                        widgetActive={activeWidget}
+                                        widgetListItem={_widget}/>
+                                }
+                                {
+                                    _widget.type === "IMAGE" &&
+                                    <ImageWidget
                                         setWidget={setActiveWidget}
                                         editing={_widget.id === activeWidget.id}
                                         widgetActive={activeWidget}
