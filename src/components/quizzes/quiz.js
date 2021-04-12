@@ -5,6 +5,7 @@ import Question from "./questions/question";
 const Quiz = () => {
     const {courseId, quizId} = useParams();
     const [questions, setQuestions] = useState([]);
+    // const [gradeMode, setGradeMode] = useState(false);
     useEffect(() => {
         // TODO: move this to a service file
         fetch(`http://localhost:3000/api/quizzes/${quizId}/questions`)
@@ -20,6 +21,7 @@ const Quiz = () => {
                     questions.map(question =>
                     <li key={question._id}>
                         <Question question={question}/>
+                        {/*<button className="btn-outline-primary ml-3" onClick={() => setGradeMode(true)}>Grade</button>*/}
                     </li>
                     )
                 }
