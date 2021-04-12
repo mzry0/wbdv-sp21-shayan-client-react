@@ -6,25 +6,30 @@ const QuizzesList = () => {
     const {courseId} = useParams();
     const [quizzes, setQuizzes] = useState([])
     useEffect(() => {
-        // TODO: implement this in a separate service file
         quizService.findAllQuizzes()
             .then((quizzes) => {
                 setQuizzes(quizzes)
             })
     }, [])
     return(
-        <div>
-            <h2>Quizzes</h2>
+        <div className="container-fluid">
+            <h1 className="font-weight-bold m-3">Quizzes</h1>
             <div className="list-group">
                 {
                     quizzes.map((quiz) => {
                         return(
-                            <Link
-                                to={`/courses/${courseId}/quizzes/${quiz._id}`}
-                                key={quiz._id}
-                                className="list-group-item">
-                                {quiz.title}
-                            </Link>
+                            <div className="list-group-item"
+                                 key={quiz._id}>
+                                <Link
+                                    to={`/courses/${courseId}/quizzes/${quiz._id}`}>
+                                    {quiz.title}
+                                </Link>
+                                <Link
+                                    className="btn btn-primary fa-pull-right"
+                                    to={`/courses/${courseId}/quizzes/${quiz._id}`}>
+                                    Start
+                                </Link>
+                            </div>
                         )
                     })
                 }
