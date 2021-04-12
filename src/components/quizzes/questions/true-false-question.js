@@ -6,41 +6,56 @@ const TrueFalseQuestion = ({question}) => {
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(null)
     return (
         <div className="container-fluid mt-4 mb-4">
-            {question.correct}
             <h4>
                 {question.question}
-                {/*{*/}
-                {/*    answerCorrect(question, answer) &&*/}
-                {/*    <i className="fas fa-check"/>*/}
-                {/*}*/}
-                {/*{*/}
-                {/*    answerWrong(question, answer) &&*/}
-                {/*    <i className="fas fa-times"/>*/}
-                {/*}*/}
+                <span className="ml-2">
+                    {
+                        isGradeMode && isAnswerCorrect &&
+                        <i className="fas fa-check text-success"/>
+                    }
+                    {
+                        isGradeMode && !isAnswerCorrect &&
+                        <i className="fas fa-times text-danger"/>
+                    }
+                </span>
             </h4>
-            <label className={isGradeMode ?
+            {/*TRUE OPTION*/}
+            <div className={isGradeMode ?
                 listItemClass(question, answer, isAnswerCorrect, true) : "list-group-item"}>
-            <input
-                type="radio"
-                onClick={() => setAnswer(true)}
-                className="mr-2"
-                name={question._id}/>
-                True
-            </label>
-            <label className={isGradeMode ?
-                listItemClass(question, answer, isAnswerCorrect, false): "list-group-item"}>
-                <input
-                    type="radio"
-                    onClick={() => setAnswer(false)}
-                    className="mr-2"
-                    name={question._id}/>
-                    False
-            </label>
+                <label>
+                    <input
+                        type="radio"
+                        disabled={isGradeMode}
+                        onClick={() => setAnswer(true)}
+                        className="mr-2"
+                        name={question._id}/>
+                    True
+                </label>
+                <i className={isGradeMode ?
+                    iconTypeClass(question, answer, isAnswerCorrect, true) : ""}/>
+            </div>
 
+            {/*FALSE OPTION*/}
+            <div className={isGradeMode ?
+                listItemClass(question, answer, isAnswerCorrect, false): "list-group-item"}>
+                <label className="">
+                    <input
+                        type="radio"
+                        disabled={isGradeMode}
+                        onClick={() => setAnswer(false)}
+                        className="mr-2"
+                        name={question._id}/>
+                        False
+                </label>
+                <i className={isGradeMode ?
+                    iconTypeClass(question, answer, isAnswerCorrect, false) : ""}/>
+            </div>
+            <div className="mt-3">Your Answer : {answer !== null ? JSON.stringify(answer) : ''}</div>
+            <br/>
             <button className="btn btn-primary"
                     disabled={isGradeMode}
                     onClick={() => {
-                        if(answer === null) return
+                        if(answer === null || isGradeMode) return
                         setIsGradeMode(true)
                         if (answerCorrect(question, answer)) {
                             setIsAnswerCorrect(true)
@@ -49,9 +64,23 @@ const TrueFalseQuestion = ({question}) => {
                             setIsAnswerCorrect(false)
                         }
 
-                    }}>Grade</button>
+                    }}>Grade
+            </button>
         </div>
     )
+}
+
+const iconTypeClass = (question, answer, isAnswerCorrect, trueOrFalse) => {
+    if (trueOrFalse === (question.correct === 'true')){
+        return "fas fa-check fa-pull-right"
+    }
+    else if (isAnswerCorrect && trueOrFalse !== (question.correct === 'true')){
+        return ""
+    }
+    else if (!isAnswerCorrect && trueOrFalse !== (question.correct === 'true')){
+        return "fas fa-times fa-pull-right"
+    }
+    else return ""
 }
 
 const listItemClass = (question, answer, isAnswerCorrect, trueOrFalse) => {
