@@ -4,6 +4,8 @@ import CourseEditor from "./components/course-editor/course-editor";
 import {BrowserRouter, Route} from "react-router-dom";
 import Home from "./components/home"
 import OldEditor from "./components/course-editor/course-editor-old"
+import QuizzesList from "./components/quizzes/quizzes-list";
+import Quiz from "./components/quizzes/quiz";
 
 function App() {
   return (
@@ -20,6 +22,12 @@ function App() {
                  render={(props) => <CourseEditor {...props}/>}>
           </Route>
               <Route path="/old-editor" exact={true} component={OldEditor}></Route>
+          <Route path="/courses/:courseId/quizzes" exact={true}>
+              <QuizzesList/>
+          </Route>
+          <Route path="/courses/:courseId/quizzes/:quizId" exact={true}>
+              <Quiz/>
+          </Route>
           {/*<Route path="/editor" component={CourseEditor}/>*/}
           {/*<Route path="/editor" exact={true} render={(props) => <CourseEditor {...props}/>}/>*/}
         {/*<div className="container-fluid">*/}

@@ -19,6 +19,7 @@ export default class CourseTable extends
                     <th>Title</th>
                     <th className="d-none d-sm-table-cell">Owned by</th>
                     <th className="d-none d-sm-table-cell">Last modified</th>
+                    <th className="d-none d-sm-table-cell">Quizzes</th>
                     <th>
                         <Link to="/courses/grid">
                             <i className="fas fa-th float-right fa-2x"></i>
