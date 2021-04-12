@@ -50,8 +50,7 @@ const TrueFalseQuestion = ({question}) => {
                 <i className={isGradeMode ?
                     iconTypeClass(question, answer, isAnswerCorrect, false) : ""}/>
             </div>
-            <div className="mt-3">Your Answer : {answer !== null ? JSON.stringify(answer) : ''}</div>
-            <br/>
+            <div className="mt-3 mb-3">Your Answer : {answer !== null ? JSON.stringify(answer) : ''}</div>
             <button className="btn btn-primary"
                     disabled={isGradeMode}
                     onClick={() => {
@@ -74,9 +73,6 @@ const iconTypeClass = (question, answer, isAnswerCorrect, trueOrFalse) => {
     if (trueOrFalse === (question.correct === 'true')){
         return "fas fa-check fa-pull-right"
     }
-    else if (isAnswerCorrect && trueOrFalse !== (question.correct === 'true')){
-        return ""
-    }
     else if (!isAnswerCorrect && trueOrFalse !== (question.correct === 'true')){
         return "fas fa-times fa-pull-right"
     }
@@ -86,9 +82,6 @@ const iconTypeClass = (question, answer, isAnswerCorrect, trueOrFalse) => {
 const listItemClass = (question, answer, isAnswerCorrect, trueOrFalse) => {
     if (trueOrFalse === (question.correct === 'true')){
         return "list-group-item list-group-item-success"
-    }
-    else if (isAnswerCorrect && trueOrFalse !== (question.correct === 'true')){
-        return "list-group-item"
     }
     else if (!isAnswerCorrect && trueOrFalse !== (question.correct === 'true')){
         return "list-group-item list-group-item-danger"
