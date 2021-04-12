@@ -44,16 +44,16 @@ const CourseRow = (
             </Link>
         </td>
         <td>
-            <i onClick={() => deleteCourse(course)} className="fas fa-trash float-right btn mr-1"></i>
+            <i onClick={() => deleteCourse(course)} className="fas fa-trash float-right btn mr-1"/>
 
             {
                 editing &&
-                <i onClick={() => saveCourse()} className="fas float-right fa-check btn"></i>
+                <i onClick={() => saveCourse()} className="fas float-right fa-check btn"/>
             }
 
             {
                 !editing &&
-                <i onClick={() => setEditing(true)} className="fas float-right fa-edit btn"></i>
+                <i onClick={() => setEditing(true)} className="fas float-right fa-edit btn"/>
             }
 
 
