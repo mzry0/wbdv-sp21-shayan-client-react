@@ -8,11 +8,11 @@ const TrueFalseQuestion = ({question}) => {
                 {question.question}
                 {
                     answer == question.correct &&
-                    <i className="fas fa-check"></i>
+                    <i className="fas fa-check"/>
                 }
                 {
                     answer != question.correct &&
-                    <i className="fas fa-times"></i>
+                    <i className="fas fa-times"/>
                 }
             </h4>
             {question.correct}

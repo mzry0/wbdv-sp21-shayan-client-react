@@ -6,9 +6,9 @@ const MultipleChoiceQuestion = ({question}) => {
             <h4>{question.question}</h4>
             {question.correct}
             {
-                question.choices.map((choice) => {
+                question.choices.map((choice, i) => {
                     return(
-                        <label>
+                        <label key={i}>
                             <input type="radio" name={question._id}/>
                             {choice}
                         </label>

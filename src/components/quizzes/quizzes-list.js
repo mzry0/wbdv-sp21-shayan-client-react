@@ -21,6 +21,7 @@ const QuizzesList = () => {
                         return(
                             <Link
                                 to={`/courses/${courseId}/quizzes/${quiz._id}`}
+                                key={quiz._id}
                                 className="list-group-item">
                                 {quiz.title}
                             </Link>

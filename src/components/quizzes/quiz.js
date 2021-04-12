@@ -18,7 +18,7 @@ const Quiz = () => {
             <ul>
                 {
                     questions.map(question =>
-                    <li>
+                    <li key={question._id}>
                         <Question question={question}/>
                     </li>
                     )
