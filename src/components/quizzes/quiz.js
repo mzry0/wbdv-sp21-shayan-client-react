@@ -1,27 +1,25 @@
 import React, {useState, useEffect} from "react";
 import {useParams} from 'react-router-dom'
 import Question from "./questions/question";
+import questionService from "../../services/questions-service"
 
 const Quiz = () => {
     const {courseId, quizId} = useParams();
     const [questions, setQuestions] = useState([]);
     // const [gradeMode, setGradeMode] = useState(false);
     useEffect(() => {
-        // TODO: move this to a service file
-        fetch(`http://localhost:3000/api/quizzes/${quizId}/questions`)
-            .then(response => response.json())
+        questionService.findQuestionsForQuiz(quizId)
             .then(questions => setQuestions(questions))
         },[])
 
     return(
-        <div>
-            <h2>Quiz {quizId}</h2>
+        <div className="container-fluid">
+            <h1 className="font-weight-bold m-3">Quiz {quizId}</h1>
             <ul>
                 {
                     questions.map(question =>
                     <li key={question._id}>
                         <Question question={question}/>
-                        {/*<button className="btn-outline-primary ml-3" onClick={() => setGradeMode(true)}>Grade</button>*/}
                     </li>
                     )
                 }
