@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const MultipleChoiceQuestion = ({question}) => {
+const MultipleChoiceQuestion = ({question, setAttempt}) => {
     const [answer, setAnswer] = useState(null)
     const [isGradeMode, setIsGradeMode] = useState(false)
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(null)
@@ -28,7 +28,14 @@ const MultipleChoiceQuestion = ({question}) => {
                                 <input type="radio"
                                        disabled={isGradeMode}
                                        className="mr-2"
-                                       onClick={() => setAnswer(choice)}
+                                       onClick={() => {
+                                           setAnswer(choice)
+                                           setAttempt((attempt) => {
+                                               const curQuestion = attempt.find(q => q._id === question._id)
+                                               curQuestion.answer = choice
+                                               return attempt
+                                           })
+                                       }}
                                        name={question._id}/>
                                 {choice}
                             </label>

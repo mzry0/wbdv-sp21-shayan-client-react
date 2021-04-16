@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const TrueFalseQuestion = ({question}) => {
+const TrueFalseQuestion = ({question, setAttempt}) => {
     const [answer, setAnswer] = useState(null)
     const [isGradeMode, setIsGradeMode] = useState(false)
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(null)
@@ -26,7 +26,14 @@ const TrueFalseQuestion = ({question}) => {
                     <input
                         type="radio"
                         disabled={isGradeMode}
-                        onClick={() => setAnswer(true)}
+                        onClick={() => {
+                            setAnswer(true)
+                            setAttempt((attempt) => {
+                                const curQuestion = attempt.find(q => q._id === question._id)
+                                curQuestion.answer = JSON.stringify(true)
+                                return attempt
+                            })
+                        }}
                         className="mr-2"
                         name={question._id}/>
                     True
@@ -42,7 +49,14 @@ const TrueFalseQuestion = ({question}) => {
                     <input
                         type="radio"
                         disabled={isGradeMode}
-                        onClick={() => setAnswer(false)}
+                        onClick={() => {
+                            setAnswer(false)
+                            setAttempt((attempt) => {
+                                const curQuestion = attempt.find(q => q._id === question._id)
+                                curQuestion.answer = JSON.stringify(false)
+                                return attempt
+                            })
+                        }}
                         className="mr-2"
                         name={question._id}/>
                         False

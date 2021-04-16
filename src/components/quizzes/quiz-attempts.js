@@ -12,7 +12,7 @@ const QuizAttempts = () => {
     }, [])
     return (
         <div className="container-fluid m-3">
-        <h1>Previous Scores for Quiz {quizId}</h1>
+        <h1>Previous Scores(%) for Quiz {quizId}</h1>
         <ul className="list-group">
             {
                 attempts && attempts.map((attempt) =>
