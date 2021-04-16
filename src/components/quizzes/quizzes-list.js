@@ -29,6 +29,11 @@ const QuizzesList = () => {
                                     to={`/courses/${courseId}/quizzes/${quiz._id}`}>
                                     Start
                                 </Link>
+                                <Link
+                                    className="btn btn-secondary fa-pull-right mr-3"
+                                    to={`/courses/${courseId}/quizzes/${quiz._id}/attempts`}>
+                                    Attempts
+                                </Link>
                             </div>
                         )
                     })
