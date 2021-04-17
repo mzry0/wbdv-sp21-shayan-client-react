@@ -1,4 +1,4 @@
-const QUIZZES_URL = 'http://localhost:3000/api/quizzes';
+const QUIZZES_URL = 'https://wbdv-sp21-shayan-server-node.herokuapp.com/api/quizzes';
 const findAttemptsForQuiz = (qid) => {
     return fetch(`${QUIZZES_URL}/${qid}/attempts`)
         .then(response => response.json())
